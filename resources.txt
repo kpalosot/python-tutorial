@@ -1,0 +1,2 @@
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
+https://medium.freecodecamp.org/learning-python-from-zero-to-hero-120ea540b567?mc_cid=ce4de87d51&mc_eid=69fb86fdf0
