@@ -2,9 +2,19 @@
 Database Module
 '''
 from datetime import datetime
-from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+from app import db, login
 
-class User(db.Model):
+@login.user_loader
+def load_user(id):
+    '''
+    app needs to have this function so that flask-login
+    can keep track of logged in users
+    '''
+    return User.query.get(int(id))
+
+class User(UserMixin, db.Model):
     '''
     User Class
     '''
@@ -16,6 +26,18 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def set_password(self, password):
+        '''
+        Setting user's password to hashed password
+        '''
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        '''
+        Checking to see if password provided matches stored hashed password
+        '''
+        return check_password_hash(self.password_hash, password)
 
 class Post(db.Model):
     '''
